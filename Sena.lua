@@ -1,5 +1,5 @@
--- Sena VIP Hub [SAFE ULTIMATE FIX - NO WHITE SCREEN]
--- Clean Matte Interface, Stable Neon Borders & Safe FPS Engine
+-- Sena VIP Hub [PERFECT VISUAL FIX - NO WHITE SCREEN]
+-- Matte Background, Neon Red Border Aura & Safe Performance Engine
 
 repeat task.wait() until game:IsLoaded()
 
@@ -9,12 +9,12 @@ local RunService = game:GetService("RunService")
 local TweenService = game:GetService("TweenService")
 if not PlayerGui then return end
 
--- Prevent Multiple UI Instances
+-- Anti-Duplication
 if PlayerGui:FindFirstChild("SenaPremiumHub") then
     PlayerGui.SenaPremiumHub:Destroy()
 end
 
--- 1. Main Screen Container
+-- 1. Core Screen GUI
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "SenaPremiumHub"
 ScreenGui.Parent = PlayerGui
@@ -23,7 +23,7 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.DisplayOrder = 99999
 
 -----------------------------------------
--- 📊 ACCURATE FPS COUNTER (Next to Chat)
+-- 📊 REAL-TIME FPS COUNTER (Next to Chat)
 -----------------------------------------
 local FPSLabel = Instance.new("TextLabel")
 FPSLabel.Name = "SenaFPSCounter"
@@ -51,11 +51,11 @@ RunService.RenderStepped:Connect(function(dt)
         FPSLabel.Text = "FPS: " .. tostring(CurrentFPS)
         
         if CurrentFPS >= 50 then
-            FPSLabel.TextColor3 = Color3.fromRGB(0, 255, 128) -- Green
+            FPSLabel.TextColor3 = Color3.fromRGB(0, 255, 128)
         elseif CurrentFPS >= 30 then
-            FPSLabel.TextColor3 = Color3.fromRGB(255, 180, 0) -- Yellow
+            FPSLabel.TextColor3 = Color3.fromRGB(255, 180, 0)
         else
-            FPSLabel.TextColor3 = Color3.fromRGB(255, 50, 50) -- Red
+            FPSLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
         end
         FrameCount = 0
         TimeElapsed = 0
@@ -63,7 +63,7 @@ RunService.RenderStepped:Connect(function(dt)
 end)
 
 -----------------------------------------
--- 📱 MOBILE TOGGLE FLOATING BUTTON (S)
+-- 📱 MOBILE TOGGLE BUTTON (S)
 -----------------------------------------
 local OpenButton = Instance.new("TextButton")
 local OpenCorner = Instance.new("UICorner")
@@ -90,7 +90,7 @@ ButtonStroke.Thickness = 1.5
 ButtonStroke.Parent = OpenButton
 
 -----------------------------------------
--- 🎨 STABLE NEON RED GLOWING PANEL
+-- 🎨 MATTE BLACK PANEL WITH NEON BORDER
 -----------------------------------------
 local MainFrame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
@@ -107,21 +107,21 @@ MainFrame.Draggable = true
 UICorner.CornerRadius = UDim.new(0, 10)
 UICorner.Parent = MainFrame
 
--- Premium Glowing Border Edge
-UIStroke.Name = "NeonGlowBorder"
+-- Premium Glowing Neon Border
+UIStroke.Name = "NeonGlow"
 UIStroke.Color = Color3.fromRGB(255, 40, 40)
 UIStroke.Thickness = 2
 UIStroke.Transparency = 0
 UIStroke.Parent = MainFrame
 
--- Smooth Glowing Aura Loop
+-- Smooth Glowing Animation
 task.spawn(function()
     local info = TweenInfo.new(1.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true)
     local tween = TweenService:Create(UIStroke, info, {Transparency = 0.5, Thickness = 1.5})
     tween:Play()
 end)
 
--- Top Panel Header Bar
+-- Header Bar
 local TopBar = Instance.new("Frame")
 TopBar.Name = "TopBar"
 TopBar.Parent = MainFrame
@@ -151,7 +151,7 @@ CloseBtn.Text = "✕"
 CloseBtn.TextColor3 = Color3.fromRGB(240, 240, 240)
 CloseBtn.TextSize = 16.000
 
--- Inside Content Base Container
+-- Inner Content Container
 local ContentFrame = Instance.new("Frame")
 local ContentCorner = Instance.new("UICorner")
 
@@ -164,7 +164,7 @@ ContentFrame.Size = UDim2.new(1, -30, 1, -75)
 ContentCorner.CornerRadius = UDim.new(0, 8)
 ContentCorner.Parent = ContentFrame
 
--- Feature Align Layer Row
+-- Feature Align Row
 local RowFrame = Instance.new("Frame")
 RowFrame.Name = "RowFrame"
 RowFrame.Parent = ContentFrame
@@ -183,7 +183,7 @@ FeatureLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
 FeatureLabel.TextSize = 14.000
 FeatureLabel.TextXAlignment = Enum.TextXAlignment.Left
 
--- 🛠️ LUXURY SMOOTH SLIDER SWITCH (100% FIXED)
+-- 🛠️ RESPONSIVE MOBILE TOGGLE SWITCH
 local ToggleContainer = Instance.new("TextButton")
 local ContainerCorner = Instance.new("UICorner")
 local ToggleCircle = Instance.new("Frame")
@@ -210,7 +210,7 @@ CircleCorner.CornerRadius = UDim.new(1, 0)
 CircleCorner.Parent = ToggleCircle
 
 ----------------------------------------------------
--- ⚙️ 100% SAFE MOBILE OPTIMIZATION ENGINE (NO BUG)
+-- ⚙️ 100% SAFE PERFORMANCE ENGINE (NO WHITE SCREEN)
 ----------------------------------------------------
 local IsEnabled = false
 local OriginalSettings = {}
@@ -219,30 +219,19 @@ local function SaveGameGraphics()
     pcall(function()
         OriginalSettings.QualityLevel = settings().Rendering.QualityLevel
         OriginalSettings.GlobalShadows = game:GetService("Lighting").GlobalShadows
-        OriginalSettings.Objects = {}
-        
-        for _, obj in pairs(workspace:GetDescendants()) do
-            if obj:IsA("BasePart") then
-                OriginalSettings.Objects[obj] = {
-                    Material = obj.Material,
-                    CastShadow = obj.CastShadow
-                }
-            end
-        end
     end)
 end
 
 local function TurnOnFPS()
     pcall(function()
-        -- Safe Rendering Tweaks
+        -- Safe Engine: Lowers Rendering & Lighting properties only
         settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
         game:GetService("Lighting").GlobalShadows = false
         
-        -- Safe Materials Only (Does not delete maps or cause white/red screens)
+        -- Safely optimize effects without touching mesh/part materials
         for _, obj in pairs(workspace:GetDescendants()) do
-            if obj:IsA("BasePart") then
-                obj.Material = Enum.Material.SmoothPlastic
-                obj.CastShadow = false
+            if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Smoke") or obj:IsA("Sparkles") then
+                obj.Enabled = false
             end
         end
     end)
@@ -254,58 +243,31 @@ local function TurnOffFPS()
         settings().Rendering.QualityLevel = OriginalSettings.QualityLevel or Enum.QualityLevel.Automatic
         game:GetService("Lighting").GlobalShadows = OriginalSettings.GlobalShadows ~= false
         
-        if OriginalSettings.Objects then
-            for obj, props in pairs(OriginalSettings.Objects) do
-                if obj and obj.Parent and obj:IsA("BasePart") then
-                    obj.Material = props.Material
-                    obj.CastShadow = props.CastShadow
-                end
+        for _, obj in pairs(workspace:GetDescendants()) do
+            if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Smoke") or obj:IsA("Sparkles") then
+                obj.Enabled = true
             end
         end
     end)
     if setfpscap then setfpscap(60) end
 end
 
--- Smooth Toggle Motion Trigger
+-- Smooth Toggle Motion Handler
 ToggleContainer.MouseButton1Click:Connect(function()
     IsEnabled = not IsEnabled
     if IsEnabled then
         SaveGameGraphics()
         TurnOnFPS()
-        ToggleContainer.BackgroundColor3 = Color3.fromRGB(255, 40, 40) -- Neon Red Switch Active
+        ToggleContainer.BackgroundColor3 = Color3.fromRGB(255, 40, 40) -- Neon Red Active
         TweenService:Create(ToggleCircle, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 27, 0, 3)}):Play()
     else
         TurnOffFPS()
-        ToggleContainer.BackgroundColor3 = Color3.fromRGB(45, 48, 55) -- Dark Matte Idle
+        ToggleContainer.BackgroundColor3 = Color3.fromRGB(45, 48, 55)
         TweenService:Create(ToggleCircle, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0, 3)}):Play()
     end
 end)
 
 -- Window Interactive Triggers
-CloseBtn.MouseButton1Click:Connect(function()
-    MainFrame.Visible = false
-    OpenButton.Visible = true
-end)
-
-OpenButton.MouseButton1Click:Connect(function()
-    MainFrame.Visible = true
-    OpenButton.Visible = false
-end)
-sEnabled = not IsEnabled
-    if IsEnabled then
-        SaveGameGraphics()
-        TurnOnFPS()
-        -- Smooth Toggle Motion Fix for Mobile
-        ToggleContainer.BackgroundColor3 = Color3.fromRGB(220, 30, 30) -- Neon Red Active Bar
-        ToggleCircle:TweenPosition(UDim2.new(0, 27, 0, 3), Enum.EasingDirection.Out, Enum.EasingStyle.Linear, 0.1, true)
-    else
-        TurnOffFPS()
-        ToggleContainer.BackgroundColor3 = Color3.fromRGB(55, 58, 65) -- Default Dark Off Bar
-        ToggleCircle:TweenPosition(UDim2.new(0, 3, 0, 3), Enum.EasingDirection.Out, Enum.EasingStyle.Linear, 0.1, true)
-    end
-end)
-
--- Structural Windows Triggers
 CloseBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = false
     OpenButton.Visible = true
