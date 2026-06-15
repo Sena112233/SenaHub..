@@ -1,19 +1,20 @@
--- Sena VIP Hub [PREMIUM FIX - NO WHITE SCREEN]
--- Animated Dark-Red Interface with Smooth Switch & Advanced Mobile Optimizer
+-- Sena VIP Hub [SAFE ULTIMATE FIX - NO WHITE SCREEN]
+-- Clean Matte Interface, Stable Neon Borders & Safe FPS Engine
 
 repeat task.wait() until game:IsLoaded()
 
 local Player = game:GetService("Players").LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui", 20)
 local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
 if not PlayerGui then return end
 
--- Anti-Duplication
+-- Prevent Multiple UI Instances
 if PlayerGui:FindFirstChild("SenaPremiumHub") then
     PlayerGui.SenaPremiumHub:Destroy()
 end
 
--- 1. Core Screen GUI
+-- 1. Main Screen Container
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "SenaPremiumHub"
 ScreenGui.Parent = PlayerGui
@@ -22,14 +23,14 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.DisplayOrder = 99999
 
 -----------------------------------------
--- 📊 REAL-TIME FPS COUNTER (Next to Chat)
+-- 📊 ACCURATE FPS COUNTER (Next to Chat)
 -----------------------------------------
 local FPSLabel = Instance.new("TextLabel")
 FPSLabel.Name = "SenaFPSCounter"
 FPSLabel.Parent = ScreenGui
-FPSLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
-FPSLabel.BackgroundTransparency = 0.2
-FPSLabel.Position = UDim2.new(0, 140, 0, 5) -- Fixed Right Next To Chat Button
+FPSLabel.BackgroundColor3 = Color3.fromRGB(15, 15, 18)
+FPSLabel.BackgroundTransparency = 0.15
+FPSLabel.Position = UDim2.new(0, 140, 0, 5) 
 FPSLabel.Size = UDim2.new(0, 85, 0, 30)
 FPSLabel.Font = Enum.Font.GothamBold
 FPSLabel.Text = "FPS: --"
@@ -40,7 +41,6 @@ local FPSCorner = Instance.new("UICorner")
 FPSCorner.CornerRadius = UDim.new(0, 6)
 FPSCorner.Parent = FPSLabel
 
--- Accurate FPS Calculator Logic
 local FrameCount = 0
 local TimeElapsed = 0
 RunService.RenderStepped:Connect(function(dt)
@@ -63,19 +63,20 @@ RunService.RenderStepped:Connect(function(dt)
 end)
 
 -----------------------------------------
--- 📱 FLOATING OPEN BUTTON (S)
+-- 📱 MOBILE TOGGLE FLOATING BUTTON (S)
 -----------------------------------------
 local OpenButton = Instance.new("TextButton")
 local OpenCorner = Instance.new("UICorner")
+local ButtonStroke = Instance.new("UIStroke")
 
 OpenButton.Name = "SenaOpenButton"
 OpenButton.Parent = ScreenGui
-OpenButton.BackgroundColor3 = Color3.fromRGB(180, 20, 20)
+OpenButton.BackgroundColor3 = Color3.fromRGB(15, 15, 18)
 OpenButton.Position = UDim2.new(0.02, 0, 0.25, 0)
 OpenButton.Size = UDim2.new(0, 45, 0, 45)
 OpenButton.Font = Enum.Font.GothamBold
 OpenButton.Text = "S"
-OpenButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenButton.TextColor3 = Color3.fromRGB(255, 40, 40)
 OpenButton.TextSize = 22.000
 OpenButton.Visible = false
 OpenButton.Active = true
@@ -84,43 +85,43 @@ OpenButton.Draggable = true
 OpenCorner.CornerRadius = UDim.new(1, 0)
 OpenCorner.Parent = OpenButton
 
+ButtonStroke.Color = Color3.fromRGB(255, 40, 40)
+ButtonStroke.Thickness = 1.5
+ButtonStroke.Parent = OpenButton
+
 -----------------------------------------
--- 🎨 LUXURY DARK-RED GRADIENT MENU
+-- 🎨 STABLE NEON RED GLOWING PANEL
 -----------------------------------------
 local MainFrame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 22)
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 18) -- Smooth Matte Style
 MainFrame.Position = UDim2.new(0.5, -180, 0.5, -90)
 MainFrame.Size = UDim2.new(0, 360, 0, 180)
 MainFrame.Active = true
 MainFrame.Draggable = true
 
-UICorner.CornerRadius = UDim.new(0, 12)
+UICorner.CornerRadius = UDim.new(0, 10)
 UICorner.Parent = MainFrame
 
--- Premium Animated Neon Red & Dark Wave Gradient
-local UIGradient = Instance.new("UIGradient")
-UIGradient.Color = ColorSequence.new({
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(15, 15, 18)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(160, 20, 20)), -- Royal Animated Red
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(15, 15, 18))
-})
-UIGradient.Rotation = 0
-UIGradient.Parent = MainFrame
+-- Premium Glowing Border Edge
+UIStroke.Name = "NeonGlowBorder"
+UIStroke.Color = Color3.fromRGB(255, 40, 40)
+UIStroke.Thickness = 2
+UIStroke.Transparency = 0
+UIStroke.Parent = MainFrame
 
--- Background Neon Wave Animation Loop
+-- Smooth Glowing Aura Loop
 task.spawn(function()
-    while task.wait(0.02) do
-        if MainFrame and UIGradient then
-            UIGradient.Rotation = (UIGradient.Rotation + 1.5) % 360
-        end
-    end
+    local info = TweenInfo.new(1.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true)
+    local tween = TweenService:Create(UIStroke, info, {Transparency = 0.5, Thickness = 1.5})
+    tween:Play()
 end)
 
--- Header/Top Bar setup
+-- Top Panel Header Bar
 local TopBar = Instance.new("Frame")
 TopBar.Name = "TopBar"
 TopBar.Parent = MainFrame
@@ -134,7 +135,7 @@ Title.BackgroundTransparency = 1.000
 Title.Position = UDim2.new(0, 15, 0, 0)
 Title.Size = UDim2.new(1, -60, 1, 0)
 Title.Font = Enum.Font.GothamBold
-Title.Text = "Sena Hub [VIP EDITION]"
+Title.Text = "Sena Hub [VIP TRON]"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextSize = 15.000
 Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -150,21 +151,20 @@ CloseBtn.Text = "✕"
 CloseBtn.TextColor3 = Color3.fromRGB(240, 240, 240)
 CloseBtn.TextSize = 16.000
 
--- Inner Content Container Panel
+-- Inside Content Base Container
 local ContentFrame = Instance.new("Frame")
 local ContentCorner = Instance.new("UICorner")
 
 ContentFrame.Name = "ContentFrame"
 ContentFrame.Parent = MainFrame
-ContentFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 18)
-ContentFrame.BackgroundTransparency = 0.15
+ContentFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 12)
 ContentFrame.Position = UDim2.new(0, 15, 0, 55)
 ContentFrame.Size = UDim2.new(1, -30, 1, -75)
 
 ContentCorner.CornerRadius = UDim.new(0, 8)
 ContentCorner.Parent = ContentFrame
 
--- Feature Layout UI Line
+-- Feature Align Layer Row
 local RowFrame = Instance.new("Frame")
 RowFrame.Name = "RowFrame"
 RowFrame.Parent = ContentFrame
@@ -179,11 +179,11 @@ FeatureLabel.BackgroundTransparency = 1.000
 FeatureLabel.Size = UDim2.new(0, 200, 1, 0)
 FeatureLabel.Font = Enum.Font.GothamMedium
 FeatureLabel.Text = "Auto Ultimate FPS Booster"
-FeatureLabel.TextColor3 = Color3.fromRGB(245, 245, 245)
+FeatureLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
 FeatureLabel.TextSize = 14.000
 FeatureLabel.TextXAlignment = Enum.TextXAlignment.Left
 
--- 🛠️ FIXED PREMIUM TOGGLE SWITCH COMPONENTS
+-- 🛠️ LUXURY SMOOTH SLIDER SWITCH (100% FIXED)
 local ToggleContainer = Instance.new("TextButton")
 local ContainerCorner = Instance.new("UICorner")
 local ToggleCircle = Instance.new("Frame")
@@ -191,7 +191,7 @@ local CircleCorner = Instance.new("UICorner")
 
 ToggleContainer.Name = "ToggleContainer"
 ToggleContainer.Parent = RowFrame
-ToggleContainer.BackgroundColor3 = Color3.fromRGB(55, 58, 65)
+ToggleContainer.BackgroundColor3 = Color3.fromRGB(45, 48, 55)
 ToggleContainer.Position = UDim2.new(1, -55, 0, 7)
 ToggleContainer.Size = UDim2.new(0, 50, 0, 26)
 ToggleContainer.Text = ""
@@ -203,14 +203,14 @@ ContainerCorner.Parent = ToggleContainer
 ToggleCircle.Name = "ToggleCircle"
 ToggleCircle.Parent = ToggleContainer
 ToggleCircle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ToggleCircle.Position = UDim2.new(0, 3, 0, 3) -- Starts left (OFF)
+ToggleCircle.Position = UDim2.new(0, 3, 0, 3) 
 ToggleCircle.Size = UDim2.new(0, 20, 0, 20)
 
 CircleCorner.CornerRadius = UDim.new(1, 0)
 CircleCorner.Parent = ToggleCircle
 
 ----------------------------------------------------
--- ⚙️ SAFE ADVANCED ANTI-LAG ENGINE (NO WHITE SCREEN)
+-- ⚙️ 100% SAFE MOBILE OPTIMIZATION ENGINE (NO BUG)
 ----------------------------------------------------
 local IsEnabled = false
 local OriginalSettings = {}
@@ -227,11 +227,6 @@ local function SaveGameGraphics()
                     Material = obj.Material,
                     CastShadow = obj.CastShadow
                 }
-            elseif obj:IsA("Decal") or obj:IsA("Texture") or obj:IsA("ParticleEmitter") or obj:IsA("Trail") then
-                OriginalSettings.Objects[obj] = {
-                    Enabled = (obj:IsA("ParticleEmitter") or obj:IsA("Trail")) and obj.Enabled or nil,
-                    Transparency = (obj:IsA("Decal") or obj:IsA("Texture")) and obj.Transparency or nil
-                }
             end
         end
     end)
@@ -239,18 +234,15 @@ end
 
 local function TurnOnFPS()
     pcall(function()
+        -- Safe Rendering Tweaks
         settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
         game:GetService("Lighting").GlobalShadows = false
         
-        -- Safe Engine: Instantly optimize object assets instead of disabling rendering
+        -- Safe Materials Only (Does not delete maps or cause white/red screens)
         for _, obj in pairs(workspace:GetDescendants()) do
             if obj:IsA("BasePart") then
                 obj.Material = Enum.Material.SmoothPlastic
                 obj.CastShadow = false
-            elseif obj:IsA("Decal") or obj:IsA("Texture") then
-                obj.Transparency = 1
-            elseif obj:IsA("ParticleEmitter") or obj:IsA("Trail") then
-                obj.Enabled = false
             end
         end
     end)
@@ -264,15 +256,9 @@ local function TurnOffFPS()
         
         if OriginalSettings.Objects then
             for obj, props in pairs(OriginalSettings.Objects) do
-                if obj and obj.Parent then
-                    if obj:IsA("BasePart") then
-                        obj.Material = props.Material
-                        obj.CastShadow = props.CastShadow
-                    elseif obj:IsA("Decal") or obj:IsA("Texture") then
-                        obj.Transparency = props.Transparency
-                    elseif obj:IsA("ParticleEmitter") or obj:IsA("Trail") then
-                        obj.Enabled = props.Enabled
-                    end
+                if obj and obj.Parent and obj:IsA("BasePart") then
+                    obj.Material = props.Material
+                    obj.CastShadow = props.CastShadow
                 end
             end
         end
@@ -280,9 +266,32 @@ local function TurnOffFPS()
     if setfpscap then setfpscap(60) end
 end
 
--- Premium Toggle Motion Handler
+-- Smooth Toggle Motion Trigger
 ToggleContainer.MouseButton1Click:Connect(function()
     IsEnabled = not IsEnabled
+    if IsEnabled then
+        SaveGameGraphics()
+        TurnOnFPS()
+        ToggleContainer.BackgroundColor3 = Color3.fromRGB(255, 40, 40) -- Neon Red Switch Active
+        TweenService:Create(ToggleCircle, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 27, 0, 3)}):Play()
+    else
+        TurnOffFPS()
+        ToggleContainer.BackgroundColor3 = Color3.fromRGB(45, 48, 55) -- Dark Matte Idle
+        TweenService:Create(ToggleCircle, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0, 3)}):Play()
+    end
+end)
+
+-- Window Interactive Triggers
+CloseBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+    OpenButton.Visible = true
+end)
+
+OpenButton.MouseButton1Click:Connect(function()
+    MainFrame.Visible = true
+    OpenButton.Visible = false
+end)
+sEnabled = not IsEnabled
     if IsEnabled then
         SaveGameGraphics()
         TurnOnFPS()
